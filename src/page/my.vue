@@ -18,12 +18,18 @@
     <div class="title2">Pictures</div>
     <div>
       <div class="Pictures">
-        <img src="../assets/images/banner1.png" alt />
-        <img src="../assets/images/banner2.png" alt />
-        <img src="../assets/images/banner3.png" alt />
-        <img src="../assets/images/banner4.png" alt />
-        <img src="../assets/images/banner5.png" alt />
-        <img src="../assets/images/banner3.png" alt />
+        <div class="left">
+          <img src='../assets/images/banner1.png' alt  />
+          <img src='../assets/images/banner4.png' alt  />
+        </div>
+        <div class="cont">
+          <img src="../assets/images/banner2.png" alt />
+          <img src="../assets/images/banner5.png" alt />
+        </div>
+        <div class="right">
+          <img src="../assets/images/banner3.png" alt />
+          <img src="../assets/images/banner1.png" alt />
+        </div>
       </div>
     </div>
 
@@ -109,12 +115,22 @@ export default {
   width: 3.35rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  .left{
+    width: 1rem;
+  }
+  .cont{
+    width: 1rem;
+    padding-top: .1rem;
+  }
+  .right{
+    width: 1rem;
+  }
   img {
     width: 1rem;
     height: 1.5rem;
     border-radius: 10px;
-    display: block;
+    display: inline-block;
     margin-bottom: 0.1rem;
   }
 }
