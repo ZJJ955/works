@@ -9,12 +9,12 @@
       <img src="../assets/images/banner5.png" alt />
     </div>
     <div class="box">
-      <mt-field class="input" placeholder="请输入用户名" type="text" v-model="username"></mt-field>
-      <mt-field class="input" placeholder="请输入密码" type="password" v-model="password"></mt-field>
+      <mt-field class="input" placeholder="请输入用户名或手机号" type="text" v-model="username"></mt-field>
+      <mt-field class="input" placeholder="请输入密码" type="password" v-model="psd"></mt-field>
     </div>
     <div class="login">
-      <mt-button type="primary" @click="login">登陆</mt-button>
-      <div class="forget">忘记密码</div>
+      <mt-button type="primary" @click="login" :disabled="!username || !psd">登陆</mt-button>
+      <!-- <div class="forget" @click="jump('forget')">忘记密码</div> -->
       <p>
         还没有登陆账号？
         <span @click="jump('register')">去注册</span>
@@ -23,11 +23,12 @@
   </div>
 </template>
 <script>
+import components from "../components/components";
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      psd: ""
     };
   },
   methods: {
@@ -37,16 +38,21 @@ export default {
       });
     },
     login() {
-      if (!this.username) {
-        this.$toast("请输入用户名");
-        return false;
-      } else if (!this.password) {
-        this.$toast("请输入密码");
-        return false;
-      }
-      this.$router.push({
-        path: '/'
-      })
+      components.GetStorage(this.username, this.psd).then(res => {
+        if (res == 1) {
+          components.token();
+          localStorage.setItem('username',this.username);
+          this.$router.push({
+            path: '/'
+          })
+        } else if (res == 2) {
+          this.$toast("密码错误！");
+          return false;
+        } else if (res == 0) {
+          this.$toast("账号不存在！");
+          return false;
+        }
+      });
     }
   }
 };
@@ -90,14 +96,14 @@ export default {
     width: 3rem;
     height: 0.44rem;
   }
-  .forget{
-      color: #26a2ff;
-      margin-top: .3rem;
+  .forget {
+    color: #26a2ff;
+    margin-top: 0.3rem;
   }
-  p{
+  p {
     margin-top: 1rem;
-    color: #8C9FAC;
-    span{
+    color: #8c9fac;
+    span {
       color: #26a2ff;
       font-weight: bold;
     }

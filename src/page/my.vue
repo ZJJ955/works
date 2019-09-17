@@ -1,13 +1,41 @@
 <template>
   <div class="my">
     <div class="box">
-      <div class="title">Project</div>
       <div class="touxiang">
-        <img src="../assets/images/banner1.png" alt />
+        <img class="left" src="../assets/images/banner5.png" alt />
+        <p>{{username}}</p>
+        <router-link class="right" :to="{name: 'setting'}">
+          <img src="../assets/images/setting.png" alt />
+        </router-link>
       </div>
-      <div class="name">Mayme Campbell</div>
     </div>
-    <div class="title2">Interests</div>
+    <div class="order">
+      <router-link class="my-indent" :to="{ name: 'home'}">
+        <span class="my-indent-left">我的订单</span>
+        <div class="my-indent-right">
+          <span>全部订单</span>
+          <img src="../assets/images/icon_right.png" alt />
+        </div>
+      </router-link>
+    </div>
+    <div class="order_list">
+      <router-link :to="{ name: 'car'}">
+        <img src="../assets/images/my_order1.png" alt />
+        <p>待付款</p>
+      </router-link>
+      <router-link :to="{ name: ''}">
+        <img src="../assets/images/my_order2.png" alt />
+        <p>待收货</p>
+      </router-link>
+      <router-link :to="{ name: ''}">
+        <img src="../assets/images/my_order3.png" alt />
+        <p>退还/售后</p>
+      </router-link>
+    </div>
+
+    <myList></myList>
+
+    <!-- <div class="title2">Interests</div>
     <div class="Interests">
       <span>mountains</span>
       <span>fashion</span>
@@ -19,8 +47,8 @@
     <div>
       <div class="Pictures">
         <div class="left">
-          <img src='../assets/images/banner1.png' alt  />
-          <img src='../assets/images/banner4.png' alt  />
+          <img src="../assets/images/banner1.png" alt />
+          <img src="../assets/images/banner4.png" alt />
         </div>
         <div class="cont">
           <img src="../assets/images/banner2.png" alt />
@@ -31,7 +59,7 @@
           <img src="../assets/images/banner1.png" alt />
         </div>
       </div>
-    </div>
+    </div> -->
 
     <tabBar :url="'my'"></tabBar>
   </div>
@@ -39,7 +67,12 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      username: ''
+    };
+  },
+  mounted(){
+    this.username = localStorage.getItem('username');
   },
   methods: {
     jump(path) {
@@ -55,29 +88,71 @@ export default {
   margin-bottom: 0.55rem;
 }
 .box {
-  background: #faf6f6;
   border-bottom: 1px solid #ddd;
-  .title {
-    padding: 0.2rem;
-    font-size: 0.3rem;
-    color: #ff9b00;
-  }
   .touxiang {
-    text-align: center;
-    img {
-      width: 1.5rem;
-      height: 1.5rem;
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+      width: 0.5rem;
+      height: 0.5rem;
       border-radius: 200px;
       box-shadow: 0 0 0.1rem #999;
     }
-  }
-  .name {
-    text-align: center;
-    padding: 0.2rem 0;
-    color: #212121;
-    font-size: 0.2rem;
+    p {
+      color: #414141;
+    }
+    .right {
+      img {
+        width: 0.24rem;
+        height: 0.24rem;
+      }
+    }
   }
 }
+.order {
+  .my-indent {
+    width: 100%;
+    box-sizing: border-box;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem;
+    border-bottom: 1px solid #b9b9b924;
+    .my-indent-right {
+      span {
+        display: inline-block;
+        color: #c2c2c2;
+        position: relative;
+      }
+      img {
+        width: 0.24rem;
+        height: 0.24rem;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.order_list {
+  border-bottom: 10px solid #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0.4rem;
+  a {
+    text-align: center;
+    img {
+      width: 0.24rem;
+      height: 0.24rem;
+      margin-bottom: 0.1rem;
+    }
+    p {
+      font-size: 0.14rem;
+    }
+  }
+}
+
 .title2 {
   padding: 0.2rem;
   font-size: 0.2rem;
@@ -116,14 +191,14 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  .left{
+  .left {
     width: 1rem;
   }
-  .cont{
+  .cont {
     width: 1rem;
-    padding-top: .1rem;
+    padding-top: 0.1rem;
   }
-  .right{
+  .right {
     width: 1rem;
   }
   img {

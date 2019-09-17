@@ -8,6 +8,8 @@ import candy from '@/page/candy'
 import tabBar from '@/components/tabBar'
 import my from '@/page/my'
 import car from '@/page/car'
+import forget from '@/page/forget'
+import setting from '@/page/setting'
 
 Vue.use(Router)
 
@@ -52,6 +54,16 @@ export default new Router({
       path: '/my',
       name: 'my',
       component: my
+    },
+    {
+      path: '/forget',
+      name: 'forget',
+      component: forget
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: setting
     },
   ]
 })
