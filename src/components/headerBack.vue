@@ -21,7 +21,7 @@ export default {
 <style lang="less" scoped>
 .mint-header {
   background: none;
-  color: #8c9fac;
+  color: #424242;
   border-bottom: 1px solid #f2f2f2;
 }
 </style>

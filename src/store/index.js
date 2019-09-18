@@ -5,6 +5,72 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    carList: [{
+        isSelect: [],
+        id: "12713052111572268",
+        swipeImgAll: require("../assets/images/swipe1_bannerAll.png"),
+        swipeImg: [
+          require("../assets/images/swipe1_banner1.png"),
+          require("../assets/images/swipe1_banner2.png")
+        ],
+        title: "Midea/美的电热水器F6021-V3C家用60L小型储水式淋浴速热智能变频",
+        depict: "小型储水式淋浴速热智能变频。",
+        price: 1099.00,
+        oldPrice: 1599.00,
+        selectList1title: '颜色',
+        selectList1: ["太空银", "白色"],
+        selectList2title: '功率',
+        selectList2: ["1800W", "2000W", "2300W"],
+        detailsImg: [
+          require("../assets/images/swipe1_details1.png"),
+          require("../assets/images/swipe1_details2.png"),
+        ]
+      },
+      {
+        isSelect: [''],
+        id: "12713052115572268",
+        swipeImgAll: require("../assets/images/swipe2_bannerAll.png"),
+        swipeImg: [
+          require("../assets/images/swipe2_banner1.png"),
+          require("../assets/images/swipe2_banner2.png")
+        ],
+        title: "宝石矿工18k玫瑰金钻石手链女au750黄金单钻手镯彩金真钻手链正品",
+        depict: "黄金单钻手镯彩金真钻手链",
+        price: 1050.00,
+        oldPrice: 1559.00,
+        selectList1title: '颜色',
+        selectList1: ["18k黄金", "18k白金"],
+        selectList2title: '钻石净度',
+        selectList2: ["SI/小瑕"],
+        detailsImg: [
+          require("../assets/images/swipe2_details1.png"),
+          require("../assets/images/swipe2_details2.png"),
+          require("../assets/images/swipe2_details3.png"),
+        ]
+      },
+      {
+        isSelect: [],
+        id: "301912211572268",
+        swipeImgAll: require("../assets/images/swipe3_bannerAll.png"),
+        swipeImg: [
+          require("../assets/images/swipe3_banner1.png"),
+          require("../assets/images/swipe3_banner2.png"),
+          require("../assets/images/swipe3_banner3.png"),
+        ],
+        title: "江南蜂王 杂花蜂蜜 百花蜂蜜 天然蜂蜜零添加",
+        depict: "百花蜂蜜 天然蜂蜜零添加",
+        price: 9.90,
+        oldPrice: 14.90,
+        selectList1title: '蜂种',
+        selectList1: ["野生蜂蜜", "养殖蜂蜜"],
+        selectList2title: '重量',
+        selectList2: ["180g", "380g", "1000g"],
+        detailsImg: [
+          require("../assets/images/swipe3_details1.png"),
+          require("../assets/images/swipe3_details2.png"),
+        ]
+      },
+    ],
     swipeList: [{
         id: "12713052111572268",
         swipeImgAll: require("../assets/images/swipe1_bannerAll.png"),
@@ -70,6 +136,7 @@ const store = new Vuex.Store({
     ],
     shoppList: [{
         id: "129120512111572268",
+        swipeImgAll: require("../assets/images/details1_banner1.png"),
         swipeImg: [
           require("../assets/images/details1_banner1.png"),
           require("../assets/images/details1_banner2.png"),
@@ -92,6 +159,7 @@ const store = new Vuex.Store({
       },
       {
         id: "12912051299111511268",
+        swipeImgAll: require("../assets/images/details2_banner1.png"),
         swipeImg: [
           require("../assets/images/details2_banner1.png"),
           require("../assets/images/details2_banner2.png"),
@@ -113,6 +181,7 @@ const store = new Vuex.Store({
       },
       {
         id: "129120512156211572268",
+        swipeImgAll: require("../assets/images/details3_banner1.png"),
         swipeImg: [
           require("../assets/images/details3_banner1.png"),
           require("../assets/images/details3_banner2.png"),
@@ -133,6 +202,7 @@ const store = new Vuex.Store({
       },
       {
         id: "129116212111572268",
+        swipeImgAll: require("../assets/images/details4_banner1.png"),
         swipeImg: [
           require("../assets/images/details4_banner1.png"),
           require("../assets/images/details4_banner2.png"),
@@ -153,6 +223,7 @@ const store = new Vuex.Store({
       },
       {
         id: "12912051216221572268",
+        swipeImgAll: require("../assets/images/details5_banner1.png"),
         swipeImg: [
           require("../assets/images/details5_banner1.png"),
           require("../assets/images/details5_banner2.png"),
@@ -173,11 +244,33 @@ const store = new Vuex.Store({
         ]
       },
     ],
-    detailsArr: []
+    detailsArr: [],
+    allPrice: 0, 
   },
   mutations: {
     detailsArr_jump(state, data) {
       state.detailsArr = data;
+    },
+    selected(state, data) {
+      if (data.select == 1) {
+        state.carList[data.index].isSelect = [''];
+        state.allPrice += state.carList[data.index].price;
+      } else {
+        state.carList[data.index].isSelect = [];
+        state.allPrice -= state.carList[data.index].price;
+      }
+    },
+    noSelected(state){
+      for (let index = 0; index < state.carList.length; index++) {
+        state.carList[index].isSelect = [];
+      }
+      state.allPrice = 0;
+    },
+    AllSelected(state){
+      for (let index = 0; index < state.carList.length; index++) {
+        state.carList[index].isSelect = [''];
+        state.allPrice += state.carList[index].price;
+      }
     },
   },
   actions: {

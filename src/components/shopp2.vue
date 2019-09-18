@@ -6,7 +6,7 @@
     <ul class="section2-list">
       <li v-for="item in list" :key="item.id" @click="jump(item)">
         <div class="img">
-          <img :src="item.swipeImg[0]" alt />
+          <img :src="item.swipeImgAll" alt />
         </div>
         <h3>{{item.title}}</h3>
         <div class="price">

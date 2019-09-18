@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import './components/Style.css'
+import "./components/Style.less";
 
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
+
+<style lang="less">
+
+</style>
 
 
