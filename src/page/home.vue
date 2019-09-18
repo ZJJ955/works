@@ -1,20 +1,8 @@
 <template>
   <div class="home">
     <mt-swipe :auto="4000">
-      <mt-swipe-item>
-        <router-link :to="{ name: 'my'}">
-          <img src="../assets/images/swipe1.png" alt />
-        </router-link>
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <router-link :to="{ name: 'my'}">
-          <img src="../assets/images/swipe2.png" alt />
-        </router-link>
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <router-link :to="{ name: 'my'}">
-          <img src="../assets/images/swipe3.png" alt />
-        </router-link>
+      <mt-swipe-item v-for="(item, index) in swipeList" :key="index" >
+        <img :src="item.swipeImgAll" alt @click="jump(item)" />
       </mt-swipe-item>
     </mt-swipe>
     <shopp1></shopp1>
@@ -29,11 +17,14 @@
 export default {
   data() {
     return {
-      search: ""
+      search: "",
+      swipeList: []
     };
   },
   created() {},
   mounted() {
+    this.swipeList = this.$store.state.swipeList;
+
     // var map = new BMap.Map("container"); // 创建地图实例
     // var point = new BMap.Point(116.404, 39.915); // 创建点坐标
     // map.centerAndZoom(point, 15);
@@ -51,9 +42,10 @@ export default {
     // myCity.get(myFun);
   },
   methods: {
-    jump(path) {
+    jump(val) {
+      this.$store.commit("detailsArr_jump", { val });
       this.$router.push({
-        path
+        path: "details"
       });
     }
   }

@@ -10,6 +10,7 @@ import my from '@/page/my'
 import car from '@/page/car'
 import forget from '@/page/forget'
 import setting from '@/page/setting'
+import details from '@/page/details'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path: '/setting',
       name: 'setting',
       component: setting
+    },
+    {
+      path: '/details',
+      name: 'details',
+      component: details
     },
   ]
 })

@@ -4,6 +4,7 @@ import router from './router'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import axios from 'axios'
+import store from '@/store/index'
 import tabBar from '@/components/tabBar'
 import shopp1 from '@/components/shopp1'
 import shopp2 from '@/components/shopp2'
@@ -45,10 +46,16 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+//跳转页面 scrollTo为0
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
+});
+
 
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

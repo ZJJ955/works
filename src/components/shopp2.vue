@@ -4,14 +4,14 @@
       <img src="../assets/images/shopp2_title.png" alt="">
     </h1>
     <ul class="section2-list">
-      <li v-for="k in 3" :key="k.id">
-        <router-link :to="{name:'my'}">
-          <img src="../assets/images/shopp2_1.png" alt />
-        </router-link>
-        <h3>华为 HUAWEI P30Pro手机【分期免息/享碎屏险/当天发】 天空之境 全网通(8GB 128GB)送华为无线充电器</h3>
+      <li v-for="item in list" :key="item.id" @click="jump(item)">
+        <div class="img">
+          <img :src="item.swipeImg[0]" alt />
+        </div>
+        <h3>{{item.title}}</h3>
         <div class="price">
-          ￥2000起
-          <span>￥1899</span>
+          ￥{{item.price}}
+          <span>￥{{item.oldPrice}}</span>
         </div>
       </li>
     </ul>
@@ -24,10 +24,21 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      list: []
+    };
   },
-  // props: ["url"],
-  methods: {}
+  mounted() {
+    this.list = this.$store.state.shoppList;
+  },
+  methods: {
+    jump(val){
+      this.$store.commit('detailsArr_jump',{val})
+      this.$router.push({
+        path: 'details'
+      })
+    }
+  }
 };
 </script>
 
@@ -51,7 +62,7 @@ export default {
       width: 50%;
       box-sizing: border-box;
       padding: 0 0.05rem;
-      a {
+      .img {
         display: block;
         width: 100%;
         position: relative;
@@ -73,7 +84,6 @@ export default {
         padding: 0.1rem 0 0.05rem;
       }
       .price {
-        text-align: center;
         padding-bottom: 0.2rem;
         color: #b4282d;
         span {
