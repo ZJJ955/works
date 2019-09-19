@@ -2,15 +2,15 @@
   <div class="banner1">
     <ul class="banner_list">
       <li>
-        <router-link :to="{ name: 'my'}" class="banner1-banner">
+        <router-link :to="{ name: ''}" class="banner1-banner">
           <img src="../assets/images/banner_1.png" alt />
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'my'}" class="banner1-banner">
+        <router-link :to="{ name: ''}" class="banner1-banner">
           <img src="../assets/images/banner_2.png" alt />
         </router-link>
-        <router-link :to="{ name: 'my'}" class="banner1-banner">
+        <router-link :to="{ name: ''}" class="banner1-banner">
           <img src="../assets/images/banner_3.png" alt />
         </router-link>
       </li>

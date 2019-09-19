@@ -6,45 +6,15 @@
     </h1>
     <div class="cont">
       <ul>
-        <li>
-          <router-link :to="{name:'sign'}">
-            <img src="../assets/images/shopp1_1.png" alt />
-          </router-link>
-          <h2>￥19.88</h2>
-          <p>￥9.99</p>
-        </li>
-        <li>
-          <router-link :to="{name:'sign'}">
-            <img src="../assets/images/shopp1_2.png" alt />
-          </router-link>
-          <h2>￥19.88</h2>
-          <p>￥9.99</p>
-        </li>
-        <li>
-          <router-link :to="{name:'sign'}">
-            <img src="../assets/images/shopp1_3.png" alt />
-          </router-link>
-          <h2>￥19.88</h2>
-          <p>￥9.99</p>
-        </li>
-        <li>
-          <router-link :to="{name:'sign'}">
-            <img src="../assets/images/shopp1_4.png" alt />
-          </router-link>
-          <h2>￥19.88</h2>
-          <p>￥9.99</p>
-        </li>
-        <li>
-          <router-link :to="{name:'sign'}">
-            <img src="../assets/images/shopp1_5.png" alt />
-          </router-link>
-          <h2>￥19.88</h2>
-          <p>￥9.99</p>
+        <li v-for="(item, index) in shopp1List" :key="index" @click="jump(item)">
+          <img :src="item.swipeImgAll" alt />
+          <h2>￥{{item.price}}</h2>
+          <p>￥{{item.oldPrice}}</p>
         </li>
       </ul>
     </div>
 
-    <router-link :to="{ name: 'my'}" class="shopp1-banner">
+    <router-link :to="{ name: 'home'}" class="shopp1-banner">
       <img src="../assets/images/shopp1_banner.gif" alt />
     </router-link>
   </div>
@@ -53,10 +23,21 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      shopp1List: []
+    };
   },
-  // props: ["url"],
-  methods: {}
+  mounted() {
+    this.shopp1List = this.$store.state.shopp1List;
+  },
+  methods: {
+    jump(val) {
+      this.$store.commit("detailsArr_jump", { val });
+      this.$router.push({
+        path: "details"
+      });
+    }
+  }
 };
 </script>
 

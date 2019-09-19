@@ -10,27 +10,27 @@
       </div>
     </div>
     <div class="order">
-      <router-link class="my-indent" :to="{ name: 'home'}">
+      <div class="my-indent" @click="goto">
         <span class="my-indent-left">我的订单</span>
         <div class="my-indent-right">
           <span>全部订单</span>
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
     </div>
     <div class="order_list">
-      <router-link :to="{ name: 'car'}">
+      <div class="list" @click="goto">
         <img src="../assets/images/my_order1.png" alt />
         <p>待付款</p>
-      </router-link>
-      <router-link :to="{ name: ''}">
+      </div>
+      <div class="list" @click="goto">
         <img src="../assets/images/my_order2.png" alt />
         <p>待收货</p>
-      </router-link>
-      <router-link :to="{ name: ''}">
+      </div>
+      <div class="list" @click="goto">
         <img src="../assets/images/my_order3.png" alt />
         <p>退还/售后</p>
-      </router-link>
+      </div>
     </div>
 
     <myList></myList>
@@ -59,7 +59,7 @@
           <img src="../assets/images/banner1.png" alt />
         </div>
       </div>
-    </div> -->
+    </div>-->
 
     <tabBar :url="'my'"></tabBar>
   </div>
@@ -68,17 +68,20 @@
 export default {
   data() {
     return {
-      username: ''
+      username: ""
     };
   },
-  mounted(){
-    this.username = localStorage.getItem('username');
+  mounted() {
+    this.username = localStorage.getItem("username");
   },
   methods: {
     jump(path) {
       this.$router.push({
         path
       });
+    },
+    goto() {
+      this.$toast("此功能正在努力开中...");
     }
   }
 };
@@ -140,7 +143,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0.2rem 0.4rem;
-  a {
+  .list {
     text-align: center;
     img {
       width: 0.24rem;

@@ -73,8 +73,10 @@
         <router-link to="/">
           <img src="../assets/tabbar/home.png" alt />
         </router-link>
-        <router-link to="car">
+        <router-link to="car" class="car">
           <img src="../assets/tabbar/car.png" alt />
+
+          <span v-if="$store.state.carList.length != 0">{{$store.state.carList.length}}</span>
         </router-link>
       </div>
       <div class="right" @click="add()">加入购物车</div>
@@ -90,11 +92,13 @@ export default {
       selected1: "",
       selected2: "",
       num: 1,
-      price: 0
+      allPrice: 0,
+      carList: []
     };
   },
   mounted() {
     this.detailsArr = this.$store.state.detailsArr.val;
+    this.carList = this.$store.state.carList;
     this.selected1 = this.detailsArr.selectList1[0];
     this.selected2 = this.detailsArr.selectList2[0];
   },
@@ -112,30 +116,38 @@ export default {
       if (this.num > 1) {
         this.num = parseInt(this.num);
         this.num--;
-        this.price = (this.num * this.detailsArr.price).toFixed(2);
+        this.allPrice = this.num * this.detailsArr.price;
       }
     },
     //加
     plus() {
       this.num = parseInt(this.num);
       this.num++;
-      this.price = (this.num * this.detailsArr.price).toFixed(2);
+      this.allPrice = this.num * this.detailsArr.price;
     },
     //加入购物车
     add() {
-      if (this.price == 0) {
-        this.price = this.detailsArr.price;
+      if (this.allPrice == 0) {
+        this.allPrice = this.detailsArr.price;
       }
       this.$messagebox
         .confirm(
           `商品名称:${this.detailsArr.title}</br>` +
-            `价格:￥${this.price}</br>` +
-            `内存:${this.selected2}</br>` +
-            `颜色:${this.selected1}</br>` +
+            `价格:￥${this.allPrice}</br>` +
+            `${this.detailsArr.selectList1title}:${this.selected1}</br>` +
+            `${this.detailsArr.selectList2title}:${this.selected2}</br>` +
             `商品ID:${this.detailsArr.id}</br>`
         )
         .then(
           action => {
+            this.carList.push({
+              allPrice: this.allPrice,
+              num: Number(this.num),
+              selected1: this.selected1,
+              selected2: this.selected2,
+              ...this.detailsArr
+            });
+            this.$store.commit("pushCarList", this.carList);
             this.$toast({
               message: "添加成功",
               duration: 1500
@@ -324,6 +336,21 @@ footer {
       img {
         width: 0.32rem;
         height: 0.32rem;
+      }
+    }
+    .car {
+      position: relative;
+      span {
+        position: absolute;
+        right: 0.23rem;
+        top: -0.15rem;
+        height: 0.2rem;
+        width: 0.2rem;
+        line-height: 0.2rem;
+        background-color: #ffaa00;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 12px;
       }
     }
   }

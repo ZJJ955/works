@@ -1,29 +1,29 @@
 <template>
   <div>
     <div class="list_wrap">
-      <router-link class="list" :to="{ name: 'home'}">
-        <div class="left">
+      <div class="list">
+        <div class="left" @click="goto">
           <img src="../assets/images/mylist_1.png" alt />
           <span>我的资产</span>
         </div>
         <div class="right">
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
 
-      <router-link class="list" :to="{ name: 'home'}">
-        <div class="left">
+      <div class="list">
+        <div class="left" @click="goto">
           <img src="../assets/images/mylist_2.png" alt />
           <span>我的优惠</span>
         </div>
         <div class="right">
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
     </div>
 
     <div class="list_wrap">
-      <router-link class="list" :to="{ name: 'home'}">
+      <div class="list" @click="goto">
         <div class="left">
           <img src="../assets/images/mylist_3.png" alt />
           <span>服务中心</span>
@@ -31,9 +31,9 @@
         <div class="right">
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
 
-      <router-link class="list" :to="{ name: 'home'}">
+      <div class="list" @click="goto">
         <div class="left">
           <img src="../assets/images/mylist_4.png" alt />
           <span>客服热线</span>
@@ -41,11 +41,11 @@
         <div class="right">
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
     </div>
 
     <div class="list_wrap border_no">
-      <router-link class="list" :to="{ name: 'candy'}">
+      <div class="list" @click="jump('candy')">
         <div class="left">
           <img src="../assets/images/mylist_5.png" alt />
           <span>糖果工厂</span>
@@ -53,7 +53,7 @@
         <div class="right">
           <img src="../assets/images/icon_right.png" alt />
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -61,10 +61,18 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {}
+  methods: {
+    jump(path) {
+      this.$router.push({
+        path
+      });
+    },
+    goto() {
+      this.$toast("此功能正在努力开中...");
+    }
+  }
 };
 </script>
 
@@ -75,9 +83,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.15rem 0.2rem;
+    padding: 0 0.2rem;
     border-bottom: 1px solid #b9b9b924;
     .left {
+      padding: 0.15rem 0;
       img {
         width: 0.24rem;
         height: 0.24rem;
@@ -89,6 +98,7 @@ export default {
       }
     }
     .right {
+      padding: 0.15rem 0;
       img {
         width: 0.24rem;
         height: 0.24rem;
@@ -99,9 +109,9 @@ export default {
     border: none;
   }
 }
-.border_no{
+.border_no {
   border: none;
-  .list{
+  .list {
     border-bottom: 1px solid #b9b9b924 !important;
   }
 }

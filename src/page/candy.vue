@@ -1,9 +1,7 @@
 <template>
   <div class="wrap">
-    <p>糖果工厂</p>
-    <div class="now">
-        当前的糖果数量：{{candyNum}}
-    </div>
+    <headerBack class="candy_head" :title="'糖果工厂'"></headerBack>
+    <div class="now">当前的糖果数量：{{candyNum}}</div>
     <audio style="display: none;" controls="controls" autoplay loop src="../static/images/dong.mp3"></audio>
   </div>
 </template>
@@ -12,7 +10,7 @@
 export default {
   data() {
     return {
-        candyNum: 100.00
+      candyNum: '100.00'
     };
   },
   methods: {}
@@ -31,5 +29,10 @@ export default {
   background-image: url(../assets/images/candy_bg.gif);
   background-size: cover;
   background-repeat: no-repeat;
+  .now{
+    text-align: center;
+    color: #fff;
+    margin-top: .3rem;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="car_wrap">
     <mt-header title="购物车">
       <router-link to slot="left">
         <mt-button></mt-button>
@@ -16,12 +16,14 @@
       <img class="middle" :src="item.swipeImgAll" alt />
       <div class="right_wrap">
         <p class="title">{{item.title}}</p>
-        <p class="guige">土豪金 - 64g</p>
-        <p class="price">￥{{item.price}}</p>
+        <p class="guige">
+          {{item.selected1}} - {{item.selected2}}
+          <span>x{{item.num}}</span>
+        </p>
+        <p class="price">￥{{item.allPrice}}</p>
       </div>
-      <img class="del" src="../assets/images/icon_del.png" alt />
+      <img class="del" @click="del(item, index)" src="../assets/images/icon_del.png" alt />
     </div>
-
     <footer>
       <div class="left">
         <mt-checklist
@@ -84,9 +86,27 @@ export default {
         this.$store.commit("noSelected");
       }
     },
-    addNum() {
-      // this.$store.commit("add",{ a: 10, b: 234 })
-      // this.$store.dispatch("fnDemo");
+    del(val, index) {
+      this.$store.commit("del", {
+        id: val.id,
+        inex: index,
+        isSelect: val.isSelect
+      });
+    },
+    add() {
+      let num = 0;
+      for (let index = 0; index < this.swipeList.length; index++) {
+        if (this.swipeList[index].isSelect.length == 1) {
+          num++;
+        }
+      }
+      if (num == 0) {
+        this.$toast("请勾选商品！");
+        return false;
+      }
+      this.$store.commit("settlement");
+      this.$toast("结算成功，请到我的订单查看详情");
+      this.selectedAll = [''];
     }
   }
 };
@@ -96,6 +116,9 @@ export default {
   background: none;
   color: #424242;
   border-bottom: 1px solid #f2f2f2;
+}
+.car_wrap{
+  margin-bottom: 1.06rem;
 }
 .car_list {
   border-bottom: 1px solid #f2f2f2;
@@ -107,7 +130,7 @@ export default {
     width: 0.18rem;
     height: 0.18rem;
     position: absolute;
-    bottom: 0.2rem;
+    bottom: 0.15rem;
     right: 0.15rem;
   }
   .selected {
@@ -135,6 +158,10 @@ export default {
     .guige {
       padding: 0.07rem 0;
       color: #a8a8a8;
+      span {
+        float: right;
+        color: #ff5000;
+      }
     }
     .price {
       color: #ff5000;
@@ -154,7 +181,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   .left {
-    width: 65%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,7 +193,7 @@ footer {
     }
   }
   .right {
-    width: 35%;
+    width: 30%;
     height: 0.5rem;
     line-height: 0.5rem;
     text-align: center;

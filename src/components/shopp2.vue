@@ -16,7 +16,7 @@
       </li>
     </ul>
     <div class="more">
-      <router-link :to="{name:'my'}">更多优惠产品 ></router-link>
+      <router-link :to="{name:''}">更多优惠产品 ></router-link>
     </div>
   </div>
 </template>
