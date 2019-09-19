@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/page/home'
-import sign from '@/page/sign'
-import register from '@/page/register'
-import login from '@/page/login'
-import candy from '@/page/candy'
-import tabBar from '@/components/tabBar'
-import my from '@/page/my'
-import car from '@/page/car'
-import forget from '@/page/forget'
-import setting from '@/page/setting'
-import details from '@/page/details'
+const home = () => import('@/page/home')
+const sign = () => import('@/page/sign')
+const register = () => import('@/page/register')
+const login = () => import('@/page/login')
+const candy = () => import('@/page/candy')
+const tabBar = () => import('@/components/tabBar')
+const my = () => import('@/page/my')
+const car = () => import('@/page/car')
+const forget = () => import('@/page/forget')
+const setting = () => import('@/page/setting')
+const details = () => import('@/page/details')
 
 Vue.use(Router)
 

@@ -65,7 +65,7 @@
         ———
         <img src="../assets/images/icon_details.png" alt /> 详情 ———
       </div>
-      <img v-for="(item, index) in detailsArr.detailsImg" :key="index" :src="item" alt />
+      <img v-for="(item, index) in detailsArr.detailsImg" :key="index" v-lazy="item" alt />
     </div>
 
     <footer>
